@@ -1,5 +1,17 @@
 # 🚦 ROADWATCH AI
 
+**🚀 FOR FAST LOGIN CITIZEN PORTAL AND GOVERNMENT PORTAL CHECKUP**
+
+**CITIZEN PORTAL:**
+- **Email:** `ssivabalan646@gmail.com`
+- **Password:** `71845`
+
+**GOVERNMENT PORTAL:**
+- **Email:** `saravananbalan237@gmail.com`
+- **Password:** `71845`
+
+---
+
 **AI-Powered Road Safety & Black Spot Detection System**
 
 RoadWatch AI is an intelligent road safety platform that helps identify accident-prone locations, prioritize interventions, and improve transparency between citizens and government authorities.
