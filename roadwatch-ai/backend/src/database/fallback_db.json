@@ -389,6 +389,39 @@
         "notes": "Approved for speed calming / lighting measures",
         "updatedAt": "2026-05-29T08:00:50.926Z"
       }
+    },
+    {
+      "id": "hotspot-1780054039171",
+      "locationName": "Road near Trichy Area (10.7991, 78.6800)",
+      "latitude": 10.80615513185903,
+      "longitude": 78.68443650889277,
+      "historicalAccidents": 15,
+      "roadClass": "National Highway (NH-45B)",
+      "junctionType": "4-Way Junction",
+      "pcuPerHour": 2800,
+      "envLighting": "Poor",
+      "roadSurface": "Potholes",
+      "predictedRiskScore": 88.2,
+      "predictedCause": "Road Surface Deterioration",
+      "actualHistoricalCause": "Road Surface Deterioration",
+      "isHeldOut": true,
+      "confidenceScore": 0.82,
+      "isTop10": true,
+      "suggestedFix": "Reconstruct worn-out road base course, fill potholes using cold-mix asphalt, and grade side drains to prevent pooling",
+      "ircReference": "IRC:SP:48-1998 (Road Surface & Drainage)",
+      "expertRelevanceRating": 4.4,
+      "futureTrend": "Increasing",
+      "renderPriority": 3,
+      "lastAudited": "2026-05-29T11:27:19.171Z",
+      "construction": {
+        "status": "APPROVED",
+        "notes": "Status updated via dashboard.",
+        "updatedAt": "2026-05-29T11:27:53.460Z",
+        "assignedTeam": "Internal Assigned Team",
+        "assignedEngineerId": "gov-1780054073377",
+        "assignedEngineerName": "sachin",
+        "targetDate": "2026-06-28T11:27:53.410Z"
+      }
     }
   ],
   "complaints": [
@@ -421,6 +454,21 @@
       "isRiskAnalyzed": true,
       "createdAt": "2026-05-29T07:49:55.551Z",
       "updatedAt": "2026-05-29T08:00:50.944Z"
+    },
+    {
+      "id": "complaint-1780053975480",
+      "issueType": "Pothole",
+      "locationName": "Road near Trichy Area (10.7991, 78.6800)",
+      "latitude": 10.80615513185903,
+      "longitude": 78.68443650889277,
+      "description": "pothole",
+      "imageUrl": "/uploads/image-1780053975428-369127634.jpg",
+      "citizenId": "citizen-1780033040804",
+      "thresholdCount": 1,
+      "status": "ANALYZED",
+      "isRiskAnalyzed": true,
+      "createdAt": "2026-05-29T11:26:15.481Z",
+      "updatedAt": "2026-05-29T11:27:19.177Z"
     }
   ],
   "citizens": [
@@ -481,6 +529,19 @@
       "govRole": "ENGINEER",
       "approvalStatus": "APPROVED",
       "createdAt": "2026-05-29T08:32:55.579Z"
+    },
+    {
+      "id": "gov-1780054073377",
+      "name": "sachin",
+      "employeeId": "ENG-1780054073349",
+      "officialEmail": "sachin@roadwatch.ai",
+      "password": "engineer123",
+      "department": "Field Engineering",
+      "phoneNumber": "",
+      "designation": "Field Engineer",
+      "govRole": "ENGINEER",
+      "approvalStatus": "APPROVED",
+      "createdAt": "2026-05-29T11:27:53.380Z"
     }
   ]
 }
