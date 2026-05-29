@@ -1,0 +1,156 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum GovRole {
+  ADMIN
+  ENGINEER
+}
+
+enum ComplaintStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  ANALYZED
+  RESOLVED
+}
+
+enum ConstructionState {
+  PENDING
+  APPROVED
+  UNDER_CONSTRUCTION
+  COMPLETED
+}
+
+model Citizen {
+  id         String      @id @default(uuid())
+  fullName   String
+  aadharNo   String      @unique
+  mobile     String
+  email      String      @unique
+  dob        DateTime
+  address    String
+  password   String
+  createdAt  DateTime    @default(now())
+  complaints Complaint[]
+}
+
+model GovernmentUser {
+  id String @id @default(uuid())
+  employeeId String @unique
+  name String?
+  department String
+  officialEmail String @unique
+  phoneNumber String? // optional phone number
+  designation String
+  password String
+  approvalStatus ApprovalStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  govRole GovRole @default(ADMIN)
+  constructions ConstructionStatus[] @relation("EngineerAssignments")
+}
+
+
+model Complaint {
+  id             String          @id @default(uuid())
+  issueType      String          // Pothole, Streetlight, Lack of Signage, Poor Junction, etc.
+  locationName   String
+  latitude       Float
+  longitude      Float
+  description    String
+  imageUrl       String?
+  status         ComplaintStatus @default(SUBMITTED)
+  citizenId      String
+  citizen        Citizen         @relation(fields: [citizenId], references: [id])
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  thresholdCount Int             @default(1)
+  isRiskAnalyzed Boolean         @default(false)
+  aiReport       AiReport?       @relation("ComplaintAiReport")
+}
+
+model Hotspot {
+  id                     String             @id @default(uuid())
+  locationName           String
+  latitude               Float
+  longitude              Float
+  
+  // Inputs
+  historicalAccidents    Int
+  roadClass              String             // National Highway, State Highway, Major District Road, Rural Road
+  junctionType           String             // T-Junction, Y-Junction, 4-Way Junction, Roundabout, Straight
+  pcuPerHour             Int                // Passenger Car Units per hour
+  envLighting            String             // Good, Poor, No Lighting
+  roadSurface            String             // Smooth, Potholes, Wet/Slippery, Gravel
+  
+  // Prediction outputs
+  predictedRiskScore     Float
+  predictedCause         String
+  actualHistoricalCause  String
+  isHeldOut              Boolean            @default(false)
+  confidenceScore        Float
+  
+  // Interventions
+  isTop10                Boolean            @default(false)
+  suggestedFix           String
+  ircReference           String
+  expertRelevanceRating  Float              // 1 to 5 rating
+  
+  // Metadata
+  lastAudited            DateTime           @default(now())
+  futureTrend            String             // Increasing, Stable, Decreasing
+  renderPriority         Int                @default(1)
+}
+
+model AiReport {
+  id                 String              @id @default(uuid())
+  complaintId        String              @unique
+  complaint          Complaint           @relation("ComplaintAiReport", fields: [complaintId], references: [id])
+  riskScore          Float
+  riskCause          String
+  recommendation     String
+  confidenceScore    Float
+  reviewStatus       String              @default("PENDING_REVIEW") // ADMIN decides
+  createdAt          DateTime            @default(now())
+  constructionStatus ConstructionStatus? @relation("AiReportConstruction")
+}
+
+model ConstructionStatus {
+  id                      String          @id @default(uuid())
+  aiReportId              String          @unique
+  aiReport                AiReport        @relation("AiReportConstruction", fields: [aiReportId], references: [id])
+  status                  ConstructionState @default(PENDING)
+  progress                Int             @default(0)
+  beforePhotoUrl          String?
+  constructionPhotoUrl    String?
+  completionPhotoUrl      String?
+  engineeringNotes        String?
+  governmentNotes         String?
+  budgetDetails           String?
+  internalRecommendations String?
+  assignedTeam            String?
+  severityScore           Float?
+  priorityRank            Float?
+  engineerId              String?
+  engineer                GovernmentUser? @relation("EngineerAssignments", fields: [engineerId], references: [id])
+
+  updatedAt    DateTime          @updatedAt
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  title       String
+  filePath    String
+  generatedBy String
+  createdAt   DateTime @default(now())
+}

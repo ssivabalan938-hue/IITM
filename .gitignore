@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.log
+*.sqlite
+uploads/
+reports/*.pdf
+.env.development
+.env.production
+.DS_Store
+.prisma/

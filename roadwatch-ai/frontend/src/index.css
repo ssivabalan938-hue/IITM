@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0B0F19; /* Brand background dark */
+    color: #F8FAFC; /* Brand text slate-50 */
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
+::-webkit-scrollbar-thumb {
+  background: #23304A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3B82F6;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(21, 29, 48, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(35, 48, 74, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+}
+
+/* Leaflet Map Popup Styling Overrides */
+.leaflet-popup-content-wrapper {
+  background: rgba(21, 29, 48, 0.95) !important;
+  color: #F8FAFC !important;
+  border: 1px solid #23304A !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(21, 29, 48, 0.95) !important;
+  border: 1px solid #23304A !important;
+}
+
+.leaflet-container {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+}
+
+/* Pulse animation for High Risk spots */
+@keyframes riskPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.risk-pulse-red {
+  animation: riskPulse 2s infinite;
+}
+
+/* Mini tab animations */
+.tab-transition {
+  transition: all 0.2s ease-in-out;
+}
+
+.field-label {
+  @apply text-[10px] font-bold text-brand-muted uppercase tracking-wider mb-1.5 block;
+}
+
